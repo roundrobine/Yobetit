@@ -1,12 +1,3 @@
-/**
- * Using Rails-like standard naming convention for endpoints.
- * GET     /api/challenges              ->  index
- * POST    /api/challenges              ->  create
- * GET     /api/challenges/:id          ->  show
- * PUT     /api/challenges/:id          ->  update
- * DELETE  /api/challenges/:id          ->  destroy
- */
-
 'use strict';
 
 import _ from 'lodash';
@@ -62,6 +53,16 @@ function removeEntity(res) {
 
 // Gets a list of Challenges
 export function index(req, res) {
+  var printResult = "Pi_";
+  var result = ChallengeService.extractNthPIDigit(12345);
+  printResult += result.toString(16);
+  console.log("Nth digit in hexadecimal format: ", printResult);
+  res.status(200).json(printResult);
+}
+
+
+// Gets Nth digit of Pi in hexadecimal format
+export function pi(req, res) {
   var printResult = "Pi_";
   var result = ChallengeService.extractNthPIDigit(12345);
   printResult += result.toString(16);

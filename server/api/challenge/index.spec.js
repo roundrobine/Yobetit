@@ -4,18 +4,11 @@ var proxyquire = require('proxyquire').noPreserveCache();
 
 var challengeCtrlStub = {
   index: 'challengeCtrl.index',
-  show: 'challengeCtrl.show',
-  create: 'challengeCtrl.create',
-  update: 'challengeCtrl.update',
-  destroy: 'challengeCtrl.destroy'
+  pi: 'challengeCtrl.pi',
 };
 
 var routerStub = {
   get: sinon.spy(),
-  put: sinon.spy(),
-  patch: sinon.spy(),
-  post: sinon.spy(),
-  delete: sinon.spy()
 };
 
 // require the index with our stubbed out modules
@@ -44,51 +37,11 @@ describe('Challenge API Router:', function() {
 
   });
 
-  describe('GET /api/challenges/:id', function() {
+  describe('GET /api/challenges/pi', function() {
 
-    it('should route to challenge.controller.show', function() {
+    it('should route to challenge.controller.pi', function() {
       expect(routerStub.get
-        .withArgs('/:id', 'challengeCtrl.show')
-        ).to.have.been.calledOnce;
-    });
-
-  });
-
-  describe('POST /api/challenges', function() {
-
-    it('should route to challenge.controller.create', function() {
-      expect(routerStub.post
-        .withArgs('/', 'challengeCtrl.create')
-        ).to.have.been.calledOnce;
-    });
-
-  });
-
-  describe('PUT /api/challenges/:id', function() {
-
-    it('should route to challenge.controller.update', function() {
-      expect(routerStub.put
-        .withArgs('/:id', 'challengeCtrl.update')
-        ).to.have.been.calledOnce;
-    });
-
-  });
-
-  describe('PATCH /api/challenges/:id', function() {
-
-    it('should route to challenge.controller.update', function() {
-      expect(routerStub.patch
-        .withArgs('/:id', 'challengeCtrl.update')
-        ).to.have.been.calledOnce;
-    });
-
-  });
-
-  describe('DELETE /api/challenges/:id', function() {
-
-    it('should route to challenge.controller.destroy', function() {
-      expect(routerStub.delete
-        .withArgs('/:id', 'challengeCtrl.destroy')
+        .withArgs('/:id', 'challengeCtrl.pi')
         ).to.have.been.calledOnce;
     });
 
