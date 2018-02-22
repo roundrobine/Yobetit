@@ -70,3 +70,37 @@ export function getCountryByFullName(country,cb){
     });
 
 }
+
+// get the list of all countries in the world
+export function matchCountryToString(stringArray, cb){
+  let strings = ["New Macedonia", "Northaustria", "North Korea", "Unitedmontenegro", "greeceFreek", "zambiatoday" ];
+  let apiUrl = config.api_endpoints.all_countries;
+  let name = 'name';
+
+  let options = {
+    method: 'GET',
+    uri: apiUrl,
+    qs: {
+      fields: name,
+    },
+    json: true // Automatically parses the JSON string in the response
+  };
+
+  rp(options)
+    .then(function (countries) {
+      let result = [];
+      let tempResults = [];
+      countries.forEach(function(country) {
+        tempResults = [];
+        tempResults = strings.filter(s => s.toUpperCase().indexOf( country.name.toUpperCase() ) !== -1);
+        console.log("Lenght of temp: ", tempResults);
+        if(tempResults.length > 0) {
+          result.push(country.name);
+        }
+      });
+      cb(null, result);
+    }, function (err) {
+      cb(err, null)
+    });
+
+}
