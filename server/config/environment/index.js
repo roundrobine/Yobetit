@@ -34,6 +34,7 @@ var all = {
 
   api_endpoints:{
     country_full_name: "https://restcountries.eu/rest/v2/name",
+    all_countries: "https://restcountries.eu/rest/v2/all"
   },
 
   // MongoDB connection options
