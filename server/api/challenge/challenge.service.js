@@ -1,24 +1,25 @@
 'use strict';
 import config from '../../config/environment';
 import _ from 'lodash';
-var bigInt = require("big-integer");
+const bigInt = require("big-integer");
+const rp = require('request-promise');
 
 /**
  Bailey-Borwein-Plouffe digit-extraction algorithm for pi in hexadecimal format
  <http://www.ams.org/journals/mcom/1997-66-218/S0025-5718-97-00856-9/>
  */
 export function extractNthPIDigit(digitNth){
-    var partial = function(digit, coefficient) {
-      var sumPartial = 0;
+    let partial = function(digit, coefficient) {
+      let sumPartial = 0;
 
       // Left sum
-      var k;
+      let k;
       for (k = 0; k <= digit - 1; k++) {
         sumPartial +=  bigInt(16).modPow((digit - 1 - k), (8 * k + coefficient)) / (8 * k + coefficient);
       }
 
       // Right sum. This converges fast...
-      var prev = undefined;
+      let prev = undefined;
       for(k = digit; sumPartial !== prev; k++) {
         prev = sumPartial;
         sumPartial += bigInt(16).pow((digit - 1 - k)) / (8 * k + coefficient);
@@ -32,11 +33,11 @@ export function extractNthPIDigit(digitNth){
      result for negative numbers. E.g. `-2.9 % 1`
      returns -0.9, the correct result is 0.1.
      */
-    var modulo = function(number) {
+    let modulo = function(number) {
       return number < 0 ? 1 - (-number % 1) : number % 1;
     };
 
-    var sum = 0;
+    let sum = 0;
     sum +=  4 * partial(digitNth, 1);
     sum += -2 * partial(digitNth, 4);
     sum += -1 * partial(digitNth, 5);
@@ -45,4 +46,27 @@ export function extractNthPIDigit(digitNth){
     sum = modulo(sum);
 
     return Math.floor(sum * 16);
+}
+
+// get a unique country by full name
+export function getCountryByFullName(country,cb){
+
+  let apiUrl = config.api_endpoints.country_full_name + "/" + country;
+
+  let options = {
+    method: 'GET',
+    uri: apiUrl,
+    qs: {
+      fullText:true,
+    },
+    json: true // Automatically parses the JSON string in the response
+  };
+
+  rp(options)
+    .then(function (res) {
+      cb(null, res)
+    }, function (err) {
+      cb(err, null)
+    });
+
 }
