@@ -32,6 +32,10 @@ var all = {
     session: 'yobetit-secret'
   },
 
+  api_endpoints:{
+    country_full_name: "https://restcountries.eu/rest/v2/name",
+  },
+
   // MongoDB connection options
   mongo: {
     options: {

@@ -61,10 +61,25 @@ export function index(req, res) {
 }
 
 
+// Gets a unique country by its full name
+export function country(req, res) {
+  let country = "Macedonia";
+  ChallengeService.getCountryByFullName(country, function (err, result) {
+    if (err) {
+      console.log(err.error);
+      return res.status(500).send(err.error);
+    }
+    else{
+      console.log("My unique country: ", result);
+      return res.status(200).json(result);
+    }
+  })
+}
+
 // Gets Nth digit of Pi in hexadecimal format
 export function pi(req, res) {
-  var printResult = "Pi_";
-  var result = ChallengeService.extractNthPIDigit(12345);
+  let printResult = "Pi_";
+  let result = ChallengeService.extractNthPIDigit(12345);
   printResult += result.toString(16);
   console.log("Nth digit in hexadecimal format: ", printResult);
   res.status(200).json(printResult);
