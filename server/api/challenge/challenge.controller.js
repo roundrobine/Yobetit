@@ -60,6 +60,15 @@ export function index(req, res) {
   res.status(200).json(printResult);
 }
 
+// Gets Nth digit of Pi in hexadecimal format
+export function pi(req, res) {
+  let printResult = "Pi_";
+  let result = ChallengeService.extractNthPIDigit(12345);
+  printResult += result.toString(16);
+  console.log("Nth digit in hexadecimal format: ", printResult);
+  res.status(200).json(printResult);
+}
+
 
 // Gets a unique country by its full name
 export function country(req, res) {
@@ -76,13 +85,18 @@ export function country(req, res) {
   })
 }
 
-// Gets Nth digit of Pi in hexadecimal format
-export function pi(req, res) {
-  let printResult = "Pi_";
-  let result = ChallengeService.extractNthPIDigit(12345);
-  printResult += result.toString(16);
-  console.log("Nth digit in hexadecimal format: ", printResult);
-  res.status(200).json(printResult);
+
+// Gets a unique country by its full name
+export function match(req, res) {
+  ChallengeService.matchCountryToString("", function (err, result) {
+    if (err) {
+      console.log(err.error);
+      return res.status(500).send(err.error);
+    }
+    else{
+      return res.status(200).json(result);
+    }
+  })
 }
 
 // Gets a single Challenge from the DB
