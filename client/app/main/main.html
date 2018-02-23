@@ -1,1 +1,28 @@
-<div>This is the main view.</div>
+<div  class="container" >
+  <form class="form-horizontal marginTop15">
+    <div class="row">
+      <div class="col-sm-4">
+        <div class = "panel panel-primary">
+          <div class = "panel-heading height55">
+            <span class="fontSize20">Find N-th digit of Pi</span>&nbsp;&nbsp;&nbsp;
+            <span class="panelButton"><a class="btn btn-default" ng-click="vm.getNthDigitOfPi()" target="_self" role="button">
+              OK</a></span>
+          </div>
+          <div class = "panel-body">
+            <div class="row">
+              <div class="col-sm-6">
+                <input ng-model="vm.pidigit"
+                       class="form-control" id="piDigit"
+                       placeholder="N-th digit of Pi">
+              </div>
+              <div class="col-sm-6">
+                <span ng-show="vm.piNthDigit">N-th digit of PI in hexadecimal format:</span>
+                {{vm.piNthDigit}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

@@ -54,7 +54,7 @@ function removeEntity(res) {
 // Gets a list of Challenges
 export function index(req, res) {
   let printResult = "Pi_";
-  let result = ChallengeService.extractNthPIDigit(12345);
+  let result = ChallengeService.extractNthPIDigit(req.query.digit);
   printResult += result.toString(16);
   console.log("Nth digit in hexadecimal format: ", printResult);
   res.status(200).json(printResult);
@@ -62,10 +62,9 @@ export function index(req, res) {
 
 // Gets Nth digit of Pi in hexadecimal format
 export function pi(req, res) {
-  let printResult = "Pi_";
-  let result = ChallengeService.extractNthPIDigit(11234);
+  let printResult = "";
+  let result = ChallengeService.extractNthPIDigit(req.query.digit);
   printResult += result.toString(16);
-  console.log("Nth digit in hexadecimal format: ", printResult);
   res.status(200).json(printResult);
 }
 
