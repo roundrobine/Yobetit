@@ -1,6 +1,10 @@
 # yobetit
 
-This project was generated with the [Angular Full-Stack Generator](https://github.com/DaftMonk/generator-angular-fullstack) version 3.1.1.
+This project is deployed at Heroku. Here is a link to the demo: 
+- [Yobetit Challenge Demo](https://yobetit-challenge.herokuapp.com/)
+
+Each task is developd in a separate panel and is interactive. The user could run each task separately unlimited number 
+of times. The last panel shows the DB Schema and the SQL query that was asked in the test.
 
 ## Getting Started
 
@@ -23,10 +27,3 @@ This project was generated with the [Angular Full-Stack Generator](https://githu
 
 4. Run `grunt serve` to start the development server. It should automatically open the client in your browser when ready.
 
-## Build & development
-
-Run `grunt build` for building and `grunt serve` for preview.
-
-## Testing
-
-Running `npm test` will run the unit tests with karma.
