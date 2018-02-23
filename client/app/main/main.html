@@ -1,21 +1,26 @@
 <div  class="container" >
   <form class="form-horizontal marginTop15">
     <div class="row">
-      <div class="col-sm-4">
+      <div class="col-md-4">
         <div class = "panel panel-primary">
-          <div class = "panel-heading height55">
-            <span class="fontSize20">Find N-th digit of Pi</span>&nbsp;&nbsp;&nbsp;
-            <span class="panelButton"><a class="btn btn-default" ng-click="vm.getNthDigitOfPi()" target="_self" role="button">
-              OK</a></span>
+          <div class = "panel-heading">
+            <span>Find N-th digit of Pi</span>&nbsp;&nbsp;&nbsp;
           </div>
           <div class = "panel-body">
             <div class="row">
-              <div class="col-sm-6">
+              <div class="col-md-9 col-xs-8">
                 <input ng-model="vm.pidigit"
                        class="form-control" id="piDigit"
-                       placeholder="N-th digit of Pi">
+                       placeholder="N-th digit of Pi"
+                       type="number">
               </div>
-              <div class="col-sm-6">
+              <div class="col-md-3 col-xs-4">
+                 <span class="panelButton"><button ng-disabled="!vm.pidigit" class="btn btn-default" ng-click="vm.getNthDigitOfPi()"
+                      role="button">OK</button></span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 paddingTop5">
                 <span ng-show="vm.piNthDigit">N-th digit of PI in hexadecimal format:</span>
                 {{vm.piNthDigit}}
               </div>
@@ -23,6 +28,113 @@
           </div>
         </div>
       </div>
+
+      <div class="col-md-4">
+        <div class = "panel panel-success">
+          <div class = "panel-heading">
+            <span>Get unique country by name</span>&nbsp;&nbsp;&nbsp;
+          </div>
+          <div class = "panel-body">
+            <div class="row">
+                <div class="col-md-9 col-xs-8">
+                  <input ng-model="vm.countryName"
+                       class="form-control" id="countryId"
+                       placeholder="Country name">
+                </div>
+                <div class="col-md-3 col-xs-4">
+                  <span class="panelButton"><a class="btn btn-default" ng-click="vm.getCountryByName()" target="_self"
+                       role="button">OK</a></span>
+                </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12 paddingTop5" ng-show="vm.country">
+                <span>Country: </span>{{vm.country.name}} <br>
+                <span>Population: </span>{{vm.country.population}} <br>
+                <span>Region: </span>{{vm.country.region}} <br>
+                <span>Capital: </span>{{vm.country.capital}} <br>
+              </div>
+              <div class="text-danger col-md-12 paddingTop5" ng-show="vm.countryError">
+                {{vm.countryError}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class = "panel panel-info">
+          <div class = "panel-heading height55">
+            <span>Slot Machine</span>&nbsp;
+            <div class="panelButton"><a class="btn btn-primary" ng-click="vm.spin()" target="_self"
+                                        role="button">Spin</a></div>
+          </div>
+          <div class = "panel-body">
+            <div class="row">
+              <div class="col-md-12 paddingTop5">
+                {{vm.spinResult.reel1}} {{vm.spinResult.reel2}} {{vm.spinResult.reel3}}  <br>
+                <span class="text-success" ng-show="vm.spinResult.prize >0">Prize Won: {{vm.spinResult.prize}}</span>
+                <span class="text-danger" ng-show="vm.spinResult.prize === 0">No Win, take another spin! </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class = "panel panel-danger">
+          <div class = "panel-heading">
+            <span>Countries matching entered words</span>&nbsp;&nbsp;&nbsp;
+            <button class="btn btn-danger" ng-click="vm.addInputField()">+</button>
+          </div>
+          <div class = "panel-body">
+            <div class="col-md-3 col-xs-4 floatRight">
+              <span class="panelButton"><a class="btn btn-default" ng-click="vm.match()" target="_self"
+                 role="button">OK</a></span>
+            </div>
+            <div class="row">
+              <div class="col-md-9 col-xs-8">
+                <div ng-repeat="string in vm.strings">
+                  <input class="form-control marginTop5" ng-model="string.name" placeholder="Enter word">
+                </div>
+              </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12 paddingTop5">
+                  <span ng-show="vm.matchCountires.length > 0">
+                    Matched countries:
+                    <span ng-repeat="match in vm.matchCountires">
+                      {{match}},
+                    </span>
+                  </span>
+                </div>
+                <div class="text-danger col-md-12 paddingTop5" ng-show="vm.matchError">
+                  {{vm.matchError}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      <div class="col-md-8">
+        <div class = "panel panel-default">
+          <div class = "panel-heading">
+            <span>DB Schema</span>&nbsp;&nbsp;&nbsp;
+          </div>
+          <div class = "panel-body">
+            <img ng-src="../../assets/images/dbSchema.png" alt="Description" width="100%" />
+            <code>
+              SELECT * FROM Player P
+              INNER JOIN GAME G ON G.id = P.gameId
+              WHERE G.type LIKE "SLOT";
+            </code>
+          </div>
+        </div>
+      </div>
+
     </div>
   </form>
 </div>

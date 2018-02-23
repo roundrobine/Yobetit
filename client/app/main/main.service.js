@@ -10,6 +10,26 @@
         params: {
           controller:'pi'
         }
+      },
+      getCountryByFullName: {
+        method:'GET',
+        params: {
+          controller:'country'
+        },
+        isArray:true
+      },
+      match: {
+        method:'POST',
+        params: {
+          controller:'match'
+        },
+        isArray:true
+      },
+      spin: {
+        method:'GET',
+        params: {
+          controller:'spin'
+        }
       }
     });
   };
