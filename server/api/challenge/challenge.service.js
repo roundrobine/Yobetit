@@ -93,7 +93,6 @@ export function matchCountryToString(stringArray, cb){
       countries.forEach(function(country) {
         tempResults = [];
         tempResults = stringArray.filter(s => s.toUpperCase().indexOf( country.name.toUpperCase() ) !== -1);
-        console.log("Length of temp: ", tempResults);
         if(tempResults.length > 0) {
           result.push(country.name);
         }

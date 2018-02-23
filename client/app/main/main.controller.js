@@ -53,7 +53,6 @@
     vm.spin = function () {
       Factory.spin('', function (result) {
         vm.spinResult = result;
-        console.log(result);
       }, function(error) {
         console.log(error);
       });
