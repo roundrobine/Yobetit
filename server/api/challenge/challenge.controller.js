@@ -53,8 +53,8 @@ function removeEntity(res) {
 
 // Gets a list of Challenges
 export function index(req, res) {
-  var printResult = "Pi_";
-  var result = ChallengeService.extractNthPIDigit(12345);
+  let printResult = "Pi_";
+  let result = ChallengeService.extractNthPIDigit(12345);
   printResult += result.toString(16);
   console.log("Nth digit in hexadecimal format: ", printResult);
   res.status(200).json(printResult);
@@ -63,7 +63,7 @@ export function index(req, res) {
 // Gets Nth digit of Pi in hexadecimal format
 export function pi(req, res) {
   let printResult = "Pi_";
-  let result = ChallengeService.extractNthPIDigit(12345);
+  let result = ChallengeService.extractNthPIDigit(11234);
   printResult += result.toString(16);
   console.log("Nth digit in hexadecimal format: ", printResult);
   res.status(200).json(printResult);
@@ -98,6 +98,17 @@ export function match(req, res) {
     }
   })
 }
+
+// Returns prize won after spinning a slot machine
+export function spin(req, res) {
+  let result = ChallengeService.spinSlotMachine();
+  console.log("Prize won: ", result);
+  console.log("Reel 1: ", result.reel1);
+  console.log("Reel 2: ", result.reel2);
+  console.log("Reel 3: ", result.reel3);
+  res.status(200).json(result);
+}
+
 
 // Gets a single Challenge from the DB
 export function show(req, res) {

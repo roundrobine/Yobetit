@@ -71,7 +71,7 @@ export function getCountryByFullName(country,cb){
 
 }
 
-// get the list of all countries in the world
+// match country name with arbitrary string
 export function matchCountryToString(stringArray, cb){
   let strings = ["New Macedonia", "Northaustria", "North Korea", "Unitedmontenegro", "greeceFreek", "zambiatoday" ];
   let apiUrl = config.api_endpoints.all_countries;
@@ -102,5 +102,64 @@ export function matchCountryToString(stringArray, cb){
     }, function (err) {
       cb(err, null)
     });
+
+}
+
+
+// Slot Machine method
+export function spinSlotMachine(){
+
+  function Cherry() {
+    this.coefficientForThreeEquals = 50;
+    this.coefficientForTwoEquals = 40;
+  }
+
+  function Apple() {
+    this.coefficientForThreeEquals = 20;
+    this.coefficientForTwoEquals = 10;
+  }
+
+  function Banana() {
+    this.coefficientForThreeEquals = 15;
+    this.coefficientForTwoEquals = 5;
+  }
+
+  function Lemon() {
+    this.coefficientForThreeEquals = 3;
+    this.coefficientForTwoEquals = 0;
+  }
+
+
+  let reel1 = [new Cherry(), new Lemon(), new Apple(), new Lemon(), new Banana(), new Banana(), new Lemon(), new Lemon()];
+  let reel2 = [new Lemon(), new Apple(), new Lemon(), new Lemon(), new Cherry(), new Apple(), new Banana(), new Lemon()];
+  let reel3 = [new Lemon(), new Apple(), new Lemon(), new Apple(), new Cherry(), new Lemon(), new Banana(), new Lemon()];
+
+  const reelItemsTotal = reel1.length;
+  let i, randomReel1, randomReel2, randomReel3, initialPrize = 1;
+  randomReel1 = reel1[Math.floor(Math.random()*reelItemsTotal)];
+  randomReel2 = reel2[Math.floor(Math.random()*reelItemsTotal)];
+  randomReel3 = reel3[Math.floor(Math.random()*reelItemsTotal)];
+
+  let response = {
+    reel1: randomReel1.constructor.name,
+    reel2: randomReel2.constructor.name,
+    reel3: randomReel3.constructor.name
+  };
+
+  let prize = function () {
+    if(_.isEqual(randomReel1, randomReel2) && _.isEqual(randomReel2, randomReel3)){
+      initialPrize = initialPrize * randomReel1.coefficientForThreeEquals;
+    } else if (_.isEqual(randomReel1, randomReel2) || _.isEqual(randomReel1, randomReel3)) {
+      initialPrize = initialPrize * randomReel1.coefficientForTwoEquals;
+    } else if(_.isEqual(randomReel2, randomReel3)){
+      initialPrize = initialPrize * randomReel2.coefficientForTwoEquals;
+    } else {
+      initialPrize = 0;
+    }
+    return initialPrize;
+  };
+
+  response.prize = prize();
+  return response;
 
 }
